@@ -1,0 +1,38 @@
+{
+    "name": "redacao-worker",
+    "version": "1.0.0",
+    "description": "Worker BullMQ para processamento assíncrono de redações",
+    "type": "module",
+    "main": "dist/worker.js",
+    "scripts": {
+        "dev": "tsx watch src/worker.ts",
+        "start": "node dist/worker.js",
+        "start:prod": "node dist/worker.js",
+        "build": "tsc",
+        "lint": "eslint src --ext .ts",
+        "test": "echo \"No tests yet\""
+    },
+    "keywords": [
+        "bullmq",
+        "redis",
+        "worker",
+        "queue",
+        "redacao"
+    ],
+    "author": "Redaline",
+    "license": "MIT",
+    "dependencies": {
+        "bullmq": "^5.5.2",
+        "dotenv": "^16.3.1",
+        "ioredis": "^5.3.5",
+        "pino": "^8.17.2"
+    },
+    "devDependencies": {
+        "@types/node": "^20.10.6",
+        "typescript": "^5.3.3",
+        "tsx": "^4.7.0"
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    }
+}
