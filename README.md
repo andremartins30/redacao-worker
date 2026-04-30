@@ -179,13 +179,8 @@ docker-compose up -d
 
 ## 📈 FASE 2: Próximas Melhorias
 
-- [ ] Integrar OCR para processar imagens
-- [ ] Integrar Gemini API para análise de conteúdo
-- [ ] Integrar RAG para recuperação de contexto
-- [ ] Adicionar persistência de resultados (banco de dados)
-- [ ] Criar endpoint de status para frontend
-- [ ] Adicionar métricas e monitoramento (Prometheus)
-- [ ] Escalar para múltiplas instâncias
+ [x] Pipeline real do worker com análise textual local
+ [x] Integrações opcionais com OCR, Gemini e RAG via variáveis de ambiente
 
 ## 📝 Estrutura de Arquivos
 
@@ -195,7 +190,10 @@ redacao-worker/
 │   ├── config/
 │   │   └── env.ts             # Validação centralizada de ambiente
 │   ├── lib/
-│   │   ├── analyzer.ts        # Lógica de análise (mock por enquanto)
+│   │   ├── analyzer.ts        # Pipeline real do worker
+│   │   ├── external-services.ts # OCR/Gemini/RAG opcionais
+│   │   ├── text-analysis.ts   # Análise textual local
+│   │   ├── types.ts           # Tipos compartilhados do worker
 │   │   ├── queue-config.ts    # Configuração BullMQ
 │   │   └── redis.ts           # Conexão Redis
 │   └── worker.ts              # Entry point do worker
@@ -213,6 +211,14 @@ redacao-worker/
 MIT
 
 ## 👨‍💻 Autor
+| `ENABLE_GEMINI_ANALYSIS` | true     | Liga/desliga análise com Gemini                |
+| `ENABLE_RAG_REVIEW`  | true        | Liga/desliga revisão RAG                       |
+| `GEMINI_API_KEY`     | -           | Chave da API Gemini                            |
+| `GEMINI_MODEL`       | gemini-2.5-flash | Modelo usado no Gemini                      |
+| `OCR_SERVICE_URL`    | -           | URL do serviço de OCR externo                  |
+| `OCR_API_KEY`        | -           | Chave do serviço de OCR                        |
+| `RAG_REVIEW_URL`     | -           | URL do endpoint de revisão RAG                 |
+| `REQUEST_TIMEOUT_MS` | 120000      | Timeout para chamadas externas                 |
 
 Redaline - Sistema de Análise de Redações
 # redacao-worker
